@@ -5,6 +5,21 @@ var rover = {
   travelLog: []
 };
 
+var landscape = [];
+function generateLandscape() {
+  for (var i = 0; i < 11; i++) {
+    var row = [];
+    for (var j = 0; j < 11; j++) {
+      // Generate a random boolean, skewed more towards false
+      var obstacle = Math.random() >= 0.8;
+      row.push(obstacle);
+    }
+    landscape.push(row);
+  }
+}
+
+generateLandscape();
+
 function turnLeft(rover) {
   console.log("turnLeft was called!");
 
@@ -52,23 +67,31 @@ function moveForward(rover) {
 
   switch (rover.direction) {
     case "N":
-      if (rover.y > 0) {
+      if (rover.y > 0 && !landscape[rover.y - 1][rover.x]) {
         rover.y--;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     case "E":
-      if (rover.x < 10) {
+      if (rover.x < 10 && !landscape[rover.y][rover.x + 1]) {
         rover.x++;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     case "S":
-      if (rover.y < 10) {
+      if (rover.y < 10 && !landscape[rover.y + 1][rover.x]) {
         rover.y++;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     case "W":
-      if (rover.x > 0) {
+      if (rover.x > 0 && !landscape[rover.y][rover.x - 1]) {
         rover.x--;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     default:
@@ -84,23 +107,31 @@ function moveBackward(rover) {
 
   switch (rover.direction) {
     case "N":
-      if (rover.y < 10) {
+      if (rover.y < 10 && !landscape[rover.y + 1][rover.x]) {
         rover.y++;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     case "E":
-      if (rover.x > 0) {
+      if (rover.x > 0 && !landscape[rover.y][rover.x - 1]) {
         rover.x--;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     case "S":
-      if (rover.y > 0) {
+      if (rover.y > 0 && !landscape[rover.y - 1][rover.x]) {
         rover.y--;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     case "W":
-      if (rover.x < 10) {
+      if (rover.x < 10 && !landscape[rover.y][rover.x + 1]) {
         rover.x++;
+      } else {
+        console.log("Obstacle in the way");
       }
       break;
     default:
